@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Pixels2Points: Fusing 2D and 3D Features for Facial Skin Segmentation">
+  <meta name="keywords" content="Skin segmentation, face registration, computer vision">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pixels2Points: Fusing 2D and 3D Features for Facial Skin Segmentation</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/145454631.png">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://syntec-research.github.io/publications/">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+    </div>
+
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Pixels2Points: Fusing 2D and 3D Features for Facial Skin Segmentation</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=M_Wav3AAAAAJ&hl=en">Victoria Yue Chen</a><sup>2</sup>,</span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=pe5XLTEAAAAJ&hl=en">Daoye Wang</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="http://stephangarbin.com/">Stephan Garbin</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=UXta2uUAAAAJ&hl=de">Sebastian Winberg</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://bednarikjan.github.io/">Jan Bednarik</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://sites.google.com/site/bolkartt/">Timo Bolkart</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://thabobeeler.com/index.html">Thabo Beeler</a><sup>1</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Google</span>
+            <span class="author-block"><sup>2</sup>ETH Zurich</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/pdf/NAN"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/NAN"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <span class="link-block">
+                <a href="https://www.youtube.com/watch?v=NAN"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>
+              <!-- Code Link.
+              <span class="link-block">
+                <a href="https://github.com/google/nerfies"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span> -->
+              <!-- Dataset Link. -->
+              <!-- <span class="link-block">
+                <a href="https://github.com/google/nerfies/releases/tag/0.1"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                  </a>
+          
+                </div> -->
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <!-- <img width="200%" src="./static/images/teaser-v9.png"> -->
+      <div class="teaser-container">
+        <img src="./static/images/teaser-v9.png" class="teaser-img" />
+        <p class="teaser-subtitle">
+          Human head registration aligns a template head mesh to the skin
+          region of a 3D head scan. Previous methods first segment images and subsequently
+          project 2D segmentation mask onto the 3D scan to differentiate between skin and 
+          non-skin areas. However, 3D scans are susceptible to reconstruction artifacts 
+          like interconnected hair, which are not present in the 2D image space. 
+          These artifacts persist in the 3D skin mask, leading to inaccurate
+          registration results. Our model uses both the 3D scan and image ViT 
+          features to output per-vertex labels directly, resulting in a clean skin/non-skin 
+          separation and thus better registration.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Face registration deforms a template mesh to closely fit a 3D face scan, the quality of which commonly degrades in 
+            non-skin regions (e.g., hair, beard, accessories), because the optimized template-to-scan distance pulls the template 
+            mesh towards the noisy scan surface.
+          </p>
+          <p>
+            Improving registration quality requires a clean separation of skin and non-skin regions on the scan mesh. 
+            Existing image-based (2D) or scan-based (3D) segmentation methods however perform poorly.
+            Image-based segmentation outputs multi-view inconsistent masks, and they cannot account for 
+            scan inaccuracies or scan-image misalignment, while scan-based methods suffer from lower spatial 
+            resolution compared to images.
+          </p>
+          <p>
+            In this work, we introduce a novel method that accurately separates skin from non-skin geometry on 3D human head scans.
+            For this, our method extracts features from multi-view images using a frozen image foundation model and aggregates 
+            these features in 3D. These lifted 2D features are then fused with 3D geometric features extracted from the scan mesh,
+            to then predict a segmentation mask directly on the scan mesh. We show that our segmentations improve the registration 
+            accuracy over pure 2D or 3D segmentation methods by 8.89% and 14.3%, respectively. 
+            Although trained only on synthetic data, our model generalizes well to real data. 
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Architecture Overview -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Model Architecture</h2>
+        <div class="teaser-container">
+          <img src="./static/images/architecture-new.png" class="arch-img" />
+          <p class="arch-subtitle">
+          Given multi-view images of an expressive human face and a reconstructed 3D scan, 
+          we first extract features from images using a frozen ViT model and upscale them 
+          back to image resolution using up-convolution layers. Then, with precomputed camera 
+          parameters, we project the features onto the mesh vertices and fuse features across 
+          views weighted by vertex visibility. A combination of geometric and ViT features 
+          is fed into DiffusionNet, outputting the final segmentation.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Architecture Overview. -->
+  </div>
+</section>
+
+<section>
+  <div class="columns is-centered has-text-centered">
+    <h2 class="title is-3">Qualitative Comparison</h2>
+  </div>
+
+  <div class="slider">
+    <div class="slide active">
+      <div class="image-grid">
+        <img src="./static/main_table_figures/gep-colored-again.png" class="grid-img" />
+        <img src="./static/main_table_figures/gep-seg-xeno.png" class="grid-img" />
+        <img src="./static/main_table_figures/gep-reg-xeno.png" class="grid-img" />
+        <img src="./static/main_table_figures/gep-seg-diffnet.png" class="grid-img" />
+        <img src="./static/main_table_figures/gep-reg-diffnet.png" class="grid-img" />
+        <img src="./static/main_table_figures/gep-seg-ours.png" class="grid-img" />
+        <img src="./static/main_table_figures/gep-reg-ours.png" class="grid-img" />
+        
+        <img src="./static/main_table_figures/uau-colored.png" class="grid-img" />
+        <img src="./static/main_table_figures/uau-seg-xeno.png" class="grid-img" />
+        <img src="./static/main_table_figures/uau-reg-xeno.png" class="grid-img" />
+        <img src="./static/main_table_figures/uau-seg-diffnet.png" class="grid-img" />
+        <img src="./static/main_table_figures/uau-reg-diffnet.png" class="grid-img" />
+        <img src="./static/main_table_figures/uau-seg-ours.png" class="grid-img" />
+        <img src="./static/main_table_figures/uau-reg-ours.png" class="grid-img" />    
+      </div>
+      <div class="caption-grid">
+        <div class="caption">RGB Images</div>
+        <div class="caption"><a href="https://ai.google.dev/edge/mediapipe/solutions/vision/image_segmenter">2D Segmentation</a></div>
+        <div class="caption">Registration using 2D mask</div>
+        <div class="caption"><a href="https://nmwsharp.com/research/diffusion-net/">3D Segmentation</a></div>
+        <div class="caption">Registration using 3D mask</div>
+        <div class="caption">Our Segmentation</div>
+        <div class="caption">Registration using our mask</div>
+      </div>
+    </div>
+  
+    <div class="slide">
+      <div class="image-grid">
+        <img src="./static/main_table_figures/ngi-colored.png" class="grid-img" />
+        <img src="./static/main_table_figures/ngi-seg-xeno.png" class="grid-img" />
+        <img src="./static/main_table_figures/ngi-reg-xeno.png" class="grid-img" />
+        <img src="./static/main_table_figures/ngi-seg-diffnet.png" class="grid-img" />
+        <img src="./static/main_table_figures/ngi-reg-diffnet.png" class="grid-img" />
+        <img src="./static/main_table_figures/ngi-seg-ours.png" class="grid-img" />
+        <img src="./static/main_table_figures/ngi-reg-ours.png" class="grid-img" />
+
+        <img src="./static/main_table_figures/nlf-gallery.png" class="grid-img" />
+        <img src="./static/main_table_figures/nlf-seg-xeno.png" class="grid-img" />
+        <img src="./static/main_table_figures/nlf-reg-xeno.png" class="grid-img" />
+        <img src="./static/main_table_figures/nlf-seg-diffnet.png" class="grid-img" />
+        <img src="./static/main_table_figures/nlf-reg-diffnet.png" class="grid-img" />
+        <img src="./static/main_table_figures/nlf-seg-ours.png" class="grid-img" />
+        <img src="./static/main_table_figures/nlf-reg-ours.png" class="grid-img" />
+      </div>
+      <div class="caption-grid">
+        <div class="caption">RGB Images</div>
+        <div class="caption"><a href="https://ai.google.dev/edge/mediapipe/solutions/vision/image_segmenter">2D Segmentation</a></div>
+        <div class="caption">Registration using 2D mask</div>
+        <div class="caption"><a href="https://nmwsharp.com/research/diffusion-net/">3D Segmentation</a></div>
+        <div class="caption">Registration using 3D mask</div>
+        <div class="caption">Our Segmentation</div>
+        <div class="caption">Registration using our mask</div>
+      </div>
+    </div>
+      
+    <div class="slide">
+      <div class="image-grid">
+        <img src="./static/main_table_figures/a1b-gallery.png" class="grid-img" />
+        <img src="./static/main_table_figures/a1b-seg-xeno.png" class="grid-img" />
+        <img src="./static/main_table_figures/a1b-reg-xeno.png" class="grid-img" />
+        <img src="./static/main_table_figures/a1b-seg-diffnet.png" class="grid-img" />
+        <img src="./static/main_table_figures/a1b-reg-diffnet.png" class="grid-img" />
+        <img src="./static/main_table_figures/a1b-seg-ours.png" class="grid-img" />
+        <img src="./static/main_table_figures/a1b-reg-ours.png" class="grid-img" />
+
+        <img src="./static/main_table_figures/446-gallery.png" class="grid-img" />
+        <img src="./static/main_table_figures/446-seg-xeno.png" class="grid-img" />
+        <img src="./static/main_table_figures/446-reg-xeno.png" class="grid-img" />
+        <img src="./static/main_table_figures/446-diffnet-seg.png" class="grid-img" />
+        <img src="./static/main_table_figures/446-diffnet-reg.png" class="grid-img" />
+        <img src="./static/main_table_figures/446-seg-ours.png" class="grid-img" />
+        <img src="./static/main_table_figures/446-reg-ours.png" class="grid-img" />
+      </div>
+      <div class="caption-grid">
+        <div class="caption">RGB Images</div>
+        <div class="caption"><a href="https://ai.google.dev/edge/mediapipe/solutions/vision/image_segmenter">2D Segmentation</a></div>
+        <div class="caption">Registration using 2D mask</div>
+        <div class="caption"><a href="https://nmwsharp.com/research/diffusion-net/">3D Segmentation</a></div>
+        <div class="caption">Registration using 3D mask</div>
+        <div class="caption">Our Segmentation</div>
+        <div class="caption">Registration using our mask</div>
+      </div>
+    </div>
+    <button class="nav-button left" onclick="prevSlide(0)">&#10094;</button>
+    <button class="nav-button right" onclick="nextSlide(0)">&#10095;</button>
+  </div>
+  
+</section>
+<section>
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered"></div>
+    <h2 class="title is-3"> </h2>
+
+    <p>
+          
+      </p>
+    </div>
+</section>
+
+
+<section>
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Synthetic Hair</h2>
+        <div class="content has-text-justified">
+          <p>
+          We re-render real data examples with a variety of synthetic hairstyles from our 
+          digital assets library. Thereafter, we run MVS and registration. Ideally, even 
+          when adding different hairstyles, the segmentation mask should allow the 
+          downstream registration result to remain consistent. It is clear here that our 
+          method allows the segmentation result to remain more consistent with the original 
+          registration result.
+          </p>
+        </div>
+      </div>
+    
+    </div>
+    <div class="slider">
+      <div class="slide active">
+        <div class="image-grid">
+          <img src="./static/main_table_figures_appendix/056-orig.png" class="grid-img" />
+          <img src="./static/main_table_figures_appendix/056-reg-orig.png" class="grid-img" />
+          <img src="./static/main_table_figures_appendix/C06_image-56.png" class="grid-img" />
+          <img src="./static//main_table_figures_appendix/056-seg-2d.png" class="grid-img" />
+          <img src="./static/main_table_figures_appendix/056-reg-2d.png" class="grid-img" />
+          <img src="./static/main_table_figures_appendix/056-seg-ours.png" class="grid-img" />
+          <img src="./static/main_table_figures_appendix/056-reg-ours.png" class="grid-img" />
+          
+          <img src="./static/main_table_figures_appendix/056-orig.png" class="grid-img" />
+          <img src="./static/main_table_figures_appendix/056-reg-orig.png" class="grid-img" />
+          <img src="./static/main_table_figures_appendix/C06_image57.png" class="grid-img" />
+          <img src="./static//main_table_figures_appendix/057-seg-2d.png" class="grid-img" />
+          <img src="./static/main_table_figures_appendix/057-reg-2d.png" class="grid-img" />
+          <img src="./static/main_table_figures_appendix/057-seg-ours.png" class="grid-img" />
+          <img src="./static/main_table_figures_appendix/057-reg-ours.png" class="grid-img" />
+        </div>
+        <div class="caption-grid">
+          <div class="caption">RGB Image</div>
+          <div class="caption">Original Registration</div>
+          <div class="caption">Synthetic Hair</div>
+          <div class="caption">2D Model Segmentation </div>
+          <div class="caption">2D Mask Registration</div>
+          <div class="caption">Our Model Segmentation </div>
+          <div class="caption">Our Mask Registration</div>
+        </div>
+      </div>
+    
+      <div class="slide">
+        <div class="image-grid">
+          <img src="./static/main_table_figures_appendix/034-orig-C06.png" class="grid-img" />
+          <img src="./static/main_table_figures_appendix/034-reg-orig.png" class="grid-img" />
+          <img src="./static/main_table_figures_appendix/C06_image-34.png" class="grid-img" />
+          <img src="./static//main_table_figures_appendix/034-seg-2d.png" class="grid-img" />
+          <img src="./static/main_table_figures_appendix/034-reg-2d.png" class="grid-img" />
+          <img src="./static/main_table_figures_appendix/034-seg-ours.png" class="grid-img" />
+          <img src="./static/main_table_figures_appendix/034-reg-ours.png" class="grid-img" />
+
+          <img src="./static/main_table_figures_appendix/034-orig-C06.png" class="grid-img" />
+          <img src="./static/main_table_figures_appendix/034-reg-orig.png" class="grid-img" />
+          <img src="./static/main_table_figures_appendix/C06_image-39.png" class="grid-img" />
+          <img src="./static//main_table_figures_appendix/039-seg-2d.png" class="grid-img" />
+          <img src="./static/main_table_figures_appendix/039-reg-2d.png" class="grid-img" />
+          <img src="./static/main_table_figures_appendix/039-seg-ours.png" class="grid-img" />
+          <img src="./static/main_table_figures_appendix/039-reg-ours.png" class="grid-img" />
+        </div>
+        <div class="caption-grid">
+          <div class="caption">RGB Image</div>
+          <div class="caption">Original Registration</div>
+          <div class="caption">Synthetic Hair</div>
+          <div class="caption">2D Model Segmentation </div>
+          <div class="caption">2D Mask Registration</div>
+          <div class="caption">Our Model Segmentation </div>
+          <div class="caption">Our Mask Registration</div>
+        </div>
+      </div>
+      <button class="nav-button left" onclick="prevSlide(1)">&#10094;</button>
+      <button class="nav-button right" onclick="nextSlide(1)">&#10095;</button>
+    </div>
+</section>
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{chen2025pixels2points,
+    author = {Chen, Victoria Yue and Wang, Daoye and Garbin, Stephan and Winberg, Sebastian and Bednarik, Jan and Bolkart, Timo and Beeler, Thabo},
+    booktitle = {Eurographics 2025 - Short Papers},
+    editor = {Cignoni, Paolo and Miguel, Eder},
+    title = {{Pixels2Points: Fusing 2D and 3D Features for Facial Skin Segmentation}},
+    year = {2025},
+    publisher = {The Eurographics Association},
+  }</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="PAPER">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/syntec-research" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            We thank <a
+              href="https://github.com/nerfies/nerfies.github.io">Nerfies</a> for this website template, which is 
+              licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<script>
+
+const currentSlides = [0, 0]; // assuming you have 3 sliders, adjust as needed
+
+function showSlide(sliderIndex, slideIndex) {
+    const sliders = document.querySelectorAll('.slider'); // all sliders
+    const slides = sliders[sliderIndex].querySelectorAll('.slide');
+
+    slides.forEach((slide, i) => {
+        slide.style.display = (i === slideIndex) ? 'block' : 'none';
+    });
+}
+
+function nextSlide(sliderIndex) {
+    const sliders = document.querySelectorAll('.slider');
+    const slides = sliders[sliderIndex].querySelectorAll('.slide');
+    currentSlides[sliderIndex] = (currentSlides[sliderIndex] + 1) % slides.length;
+    showSlide(sliderIndex, currentSlides[sliderIndex]);
+}
+
+function prevSlide(sliderIndex) {
+    const sliders = document.querySelectorAll('.slider');
+    const slides = sliders[sliderIndex].querySelectorAll('.slide');
+    currentSlides[sliderIndex] = (currentSlides[sliderIndex] - 1 + slides.length) % slides.length;
+    showSlide(sliderIndex, currentSlides[sliderIndex]);
+}
+</script>
+</body>
+</html>
